@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Indentation_Error_Project"
+version = "0.1.0"
+description = "The project of team Indentation Error"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+  "numpy>=2.0",
+  "pandas>=2.2",
+]
