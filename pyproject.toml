@@ -8,7 +8,17 @@ version = "0.1.0"
 description = "Olympics data analysis."
 readme = "README.md"
 requires-python = ">=3.13"
+
 dependencies = [
-  "numpy>=2.0",
-  "pandas>=2.2",
+    "datasets>=4.8.4",
+    "numpy>=2.0",
+    "pandas>=2.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",      
+    "jupyter", 
+    "matplotlib", 
+    "ruff",       
 ]
