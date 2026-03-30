@@ -1,4 +1,4 @@
-from package_name.load_data import load_data
+from polympics.load_data import load_data
 def explore():
     """
     Load the Olympics dataset and print basic information
