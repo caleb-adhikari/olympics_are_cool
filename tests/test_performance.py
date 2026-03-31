@@ -2,8 +2,7 @@ import pandas as pd
 import numpy as np
 import pytest
 
-from package_name.performance import prepare_data, country_efficiency, efficiency_trends
-
+from olympoly.performance import prepare_data, country_efficiency, efficiency_trends
 
 # -------------------------
 # Fixtures

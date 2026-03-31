@@ -5,7 +5,8 @@ Matches style of test_timeline.py
 """
 
 import pandas as pd
-from olympics_markets import market_data
+# i added the proper path? what are we importing tho? seems like market data is not a function within the python file
+from olympoly.olympics_betting.market_data import market_data
 
 
 # Create sample dataset
