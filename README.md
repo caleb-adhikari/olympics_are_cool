@@ -33,3 +33,4 @@ To set up the environment and explore the analysis, clone the repository and ins
 git clone https://github.com/caleb-adhikari/olympics_are_cool
 cd olympics_are_cool
 pip install .
+```
