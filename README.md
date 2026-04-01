@@ -12,10 +12,8 @@ The core objective of `olympoly` is to determine if historical data can "out-pre
 
 ### Key Features
 
-- **Historical Baseline Engine:** Processes 120+ years of Olympic data to establish athlete and nation-state performance benchmarks.
-- **PolyMarket Integration:** Interfaces with the PolyMarket API to fetch live odds and market volume for upcoming events.
-- **Edge Detection:** Automatically calculates "Expected Value" (EV) by comparing model-generated probabilities against market prices.
-- **Data Pipelines:** Streamlined cleaning and normalization for heterogeneous sports data (track, pool, and field).
+- **Time Series Analysis:** Analyze trends regarding athlete participation, medal counts, and sport popularity.
+- **Polymarket Simulation:** Simulates Olympics sport betting via Polymarket using simulated data.
 
 ---
 
@@ -24,7 +22,7 @@ The core objective of `olympoly` is to determine if historical data can "out-pre
 To set up the environment and explore the analysis, clone the repository and install the package:
 
 ```bash
-git clone https://github.com/caleb-adhikari/olympics_are_cool
-cd olympics_are_cool
+git clone https://github.com/caleb-adhikari/olympoly.git
+cd olympoly
 pip install .
 ```
