@@ -5,7 +5,7 @@ Pytest tests for olympics_data.timeline module.
 
 import pandas as pd
 import pytest
-from olympoly.timeline import timeline  # replace with your actual package name
+from olympoly.timeline import timeline 
 
 # Load the dataset (for faster testing, you could use a small CSV sample)
 df = pd.read_csv("athlete_events.csv")

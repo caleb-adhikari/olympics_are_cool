@@ -9,7 +9,7 @@ Functions:
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from package_name.load_data import load_data
+from olympoly.load_data import load_data
 
 
 def prepare_data():
