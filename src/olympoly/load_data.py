@@ -5,7 +5,7 @@ import requests
 
 # Settings to fetch Demographic Data of Countries using Census API
 
-API_KEY = "91c5c53fc5fc226d76c4403cc2b5f8406e914433"
+API_KEY = "TYPE KEY HERE"
 BASE_URL = "https://api.census.gov/data/timeseries/idb/5year"
 
 params = {
@@ -37,6 +37,8 @@ def load_demographic_data():
     # Fix data types
     for col in ["POP", "TFR", "E0", "IMR", "GR", "NMR", "CBR", "CDR"]:
         df[col] = pd.to_numeric(df[col])
+
+    ###### Need to rename these variables to understadable names #####
 
     return df
 
