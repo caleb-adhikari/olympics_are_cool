@@ -1,25 +1,34 @@
 import requests
+import pandas as pd
 
-slugs = [
-    "2026-winter-olympics-most-gold-medals",
-    "2026-winter-olympics-most-medals",
-    "2026-winter-olympics-ice-hockey-gold-medal-winner",
-]
+def search_polymarket(topic):
+    url = "https://gamma-api.polymarket.com/markets"
+    
+    params = {
+        "search": topic,
+        "limit": 50,
+        "active": False
+    }
+    
+    response = requests.get(url, params=params)
+    data = response.json()
+    
+    markets = []
+    
+    for market in data:
+        markets.append({
+            "question": market.get("question"),
+            "outcomes": market.get("outcomes"),
+            "prices": market.get("outcomePrices"),
+            "volume": market.get("volume"),
+            "liquidity": market.get("liquidity"),
+            "active": market.get("active"),
+            "tag": market.get("tags")
+        })
+    
+    return pd.DataFrame(data)
 
-for slug in slugs:
-    r = requests.get(
-        "https://gamma-api.polymarket.com/events",
-        params={"slug": slug}
-    )
-    data = r.json()
-    print(f"\nSlug: {slug}")
-    print(f"  Found: {len(data)} event(s)")
-    for e in data:
-        print(f"  Event URL: https://polymarket.com/event/{e.get('slug', slug)}")
-        for m in e.get("markets", []):
-            market_slug = m.get('slug')
-            if market_slug:
-                print(f"  → Market URL: https://polymarket.com/market/{market_slug}")
-            else:
-                condition_id = m.get('conditionId')
-                print(f"  → Market (conditionId): https://polymarket.com/market?conditionId={condition_id}")
+df = search_polymarket("olympics")
+print(df.head())
+
+# Issue: seach function only returns market that are currently open. We need to be able to search for closed markets as well.
