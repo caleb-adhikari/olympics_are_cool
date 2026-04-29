@@ -11,9 +11,11 @@
 The core objective of `olympoly` is to determine if historical data can "out-predict" public sentiment. By leveraging over a century of Olympic datasets and modern machine learning baselines, the tool flags instances where the market's implied probability (the odds) deviates significantly from statistical reality.
 
 ### Key Features
-- **Time Series Analysis:** Analyze trends regarding athlete participation, medal counts, and sport popularity.
-- **Simulation:** Simulates Olympics sport betting.
-- **Machine Learning:** Test different models on Olympic data.
+- **Data Analysis:** Analyze trends regarding athlete participation, medal counts, and sport popularity.
+- **Machine Learning:** Train models to estimate probabilities of Olympic outcomes.
+- **Aggregation:** Convert athlete-level predictions into event-level estimates (e.g., by country).
+- **Market Comparison:** Identify discrepancies between model probabilities and market-implied odds.
+- **Simulation:** Evaluate betting strategies based on detected differences.
 
 ---
 
@@ -45,3 +47,41 @@ Optional requirements:
 * ``jupyter``
 * ``matplotlib``
 * ``ruff``
+
+---
+
+## ▶️ Run the Demo
+
+Run the demonstration of olympoly’s capabilities:
+
+```python
+from olympoly.demo import run_demo
+
+run_demo()
+```
+
+This executes the complete pipeline, including:
+- Data loading and cleaning
+- Performance and timeline analysis
+- Visualization of trends
+- Predictive modeling
+- Strategy simulation
+
+---
+
+## 🧪 Testing
+
+Run the test suite:
+
+```bash
+pytest
+```
+
+Tests cover:
+- Model training and feature engineering  
+- Market vs model comparisons  
+- Simulation strategies  
+- Data validation  
+- Visualization functions  
+
+---
