@@ -11,7 +11,7 @@
 The core objective of `olympoly` is to determine if historical data can "out-predict" public sentiment. By leveraging over a century of Olympic datasets and modern machine learning baselines, the tool flags instances where the market's implied probability (the odds) deviates significantly from statistical reality.
 
 ### Key Features
-- **Data Analysis:** Analyze trends regarding athlete participation, medal counts, and sport popularity.
+- **Time Series Analysis:** Analyze trends and changes in Olympic participation and medal outcomes over time.
 - **Machine Learning:** Train models to estimate probabilities of Olympic outcomes.
 - **Aggregation:** Convert athlete-level predictions into event-level estimates (e.g., by country).
 - **Market Comparison:** Identify discrepancies between model probabilities and market-implied odds.
