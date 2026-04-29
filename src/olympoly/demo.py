@@ -3,7 +3,9 @@
 from olympoly.load_data import get_cleaned_data
 from olympoly.performance import country_efficiency, efficiency_trends
 from olympoly.timeline import participation_trends, medal_trends, sport_popularity
-
+from olympoly.olympics_betting.regression_model.model import train_model
+from olympoly.olympics_betting.simulation import simulate_market_strategy
+import pandas as pd
 
 def run_demo():
     """Run a full demonstration of olympoly's analysis capabilities.
@@ -33,6 +35,32 @@ def run_demo():
 
     print("\n5. Plotting the top 5 most popular sports over time...")
     sport_popularity(df, plot=True)
+
+    print("\n--- MODELING & SIMULATION ---")
+
+    print("6. Training predictive model...")
+    
+    df_model = df.copy()
+    for col in df_model.columns:
+        df_model[col] = df_model[col].astype(object)
+
+    model, X_test, y_test = train_model(df_model)
+
+    print("Model trained. Generating predictions...")
+    probs = model.predict_proba(X_test)[:, 1]
+
+    print("7. Running simple betting simulation...")
+    
+    sim_df = pd.DataFrame({
+        "event": ["A", "B", "C", "D"],
+        "price": [0.5, 0.5, 0.5, 0.5],
+        "model_prob": probs[:4]
+    })
+
+    _, summary = simulate_market_strategy(sim_df, bet_size=0.1)
+
+    print("Simulation summary:")
+    print(summary)
 
 
 if __name__ == "__main__":
