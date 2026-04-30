@@ -23,9 +23,29 @@ The core objective of `olympoly` is to determine if historical data can "out-pre
 
 To set up the environment and explore the analysis, clone the repository and install the package:
 
+# Olympoly Project Setup Instructions
+
+1. Clone the repository
 ```bash
+# 1. Clone the repository
 git clone https://github.com/caleb-adhikari/olympoly.git
 cd olympoly
+
+# 2. Create a virtual environment
+python -m venv venv
+# 3. Activate the virtual environment
+
+# On Windows:
+# Command Prompt:
+.\venv\Scripts\activate
+# PowerShell:
+.\venv\Scripts\Activate.ps1
+
+# On macOS / Linux:
+source venv/bin/activate
+
+# 4. Install the package in editable mode with development dependencies
+python -m pip install --upgrade pip
 python -m pip install -e ".[dev]"
 ```
 
