@@ -25,7 +25,6 @@ To set up the environment and explore the analysis, clone the repository and ins
 
 # Olympoly Project Setup Instructions
 
-1. Clone the repository
 ```bash
 # 1. Clone the repository
 git clone https://github.com/caleb-adhikari/olympoly.git
@@ -89,7 +88,8 @@ This executes the complete pipeline, including:
 
 ---
 
-## 🧪 Testing
+## 🧪 Testing  ![Coverage](https://img.shields.io/badge/coverage-57%25-yellow?logo=pytest&logoColor=white)
+
 
 Run the test suite:
 
