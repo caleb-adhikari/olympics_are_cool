@@ -140,3 +140,81 @@ def simulate_edge_strategy(df, threshold=0.1):
         "accuracy": accuracy,
         "total_bets": total
     }
+
+def kelly_bet_size(
+    model_prob: float,
+    market_prob: float,
+    bankroll: float,
+    fraction: float = 1.0,
+    max_bet_fraction: float = 0.25,
+) -> dict:
+    """
+    Calculate the optimal bet size using the Kelly Criterion.
+
+    The Kelly Criterion maximizes long-run bankroll growth by sizing bets
+    proportionally to edge and inversely to odds. A fractional Kelly
+    (fraction < 1.0) is used in practice to reduce variance.
+
+    Parameters
+    ----------
+    model_prob : float
+        Your model's estimated probability of the YES outcome (0 < p < 1).
+    market_prob : float
+        The market's implied probability, i.e. the price (0 < p < 1).
+    bankroll : float
+        Current available capital.
+    fraction : float
+        Fractional Kelly multiplier (default 1.0 = full Kelly).
+        Use 0.5 for half-Kelly, which is common in practice.
+    max_bet_fraction : float
+        Hard cap on bet size as a fraction of bankroll (default 0.25).
+        Prevents Kelly from suggesting recklessly large bets on high-edge plays.
+
+    Returns
+    -------
+    dict with keys:
+        - kelly_fraction  : raw Kelly fraction of bankroll to bet
+        - adjusted_fraction : after applying `fraction` multiplier and cap
+        - bet_amount      : dollar amount to bet given bankroll
+        - edge            : model_prob - market_prob
+        - recommended     : True if a positive edge exists, False otherwise
+
+    Examples
+    --------
+    >>> kelly_bet_size(model_prob=0.6, market_prob=0.45, bankroll=100.0)
+    {'kelly_fraction': 0.2727..., 'adjusted_fraction': 0.25, 'bet_amount': 25.0, ...}
+
+    Notes
+    -----
+    Formula: f* = (p * b - q) / b
+    where b = (1 / market_prob) - 1  (decimal odds - 1)
+          p = model_prob
+          q = 1 - model_prob
+    """
+    if not (0 < model_prob < 1):
+        raise ValueError(f"model_prob must be between 0 and 1, got {model_prob}")
+    if not (0 < market_prob < 1):
+        raise ValueError(f"market_prob must be between 0 and 1, got {market_prob}")
+
+    edge = model_prob - market_prob
+
+    # Decimal odds implied by market price (e.g. 0.45 price → odds of ~1.22)
+    decimal_odds = (1.0 / market_prob) - 1.0
+    q = 1.0 - model_prob
+
+    # Kelly formula
+    kelly_fraction = (model_prob * decimal_odds - q) / decimal_odds
+
+    # Apply fractional Kelly and hard cap
+    adjusted_fraction = min(kelly_fraction * fraction, max_bet_fraction)
+    adjusted_fraction = max(adjusted_fraction, 0.0)  # no negative bets
+
+    bet_amount = round(bankroll * adjusted_fraction, 2)
+
+    return {
+        "kelly_fraction": round(kelly_fraction, 6),
+        "adjusted_fraction": round(adjusted_fraction, 6),
+        "bet_amount": bet_amount,
+        "edge": round(edge, 6),
+        "recommended": edge > 0 and kelly_fraction > 0,
+    }
