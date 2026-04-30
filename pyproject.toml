@@ -15,9 +15,9 @@ dependencies = [
     "pandas>=2.2",
     "seaborn>=0.13",
     "scikit-learn>=1.8.0",
-    "python-dotenv",
-    "requests",
-    "matplotlib",
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
+    "matplotlib>=3.8.0",
 ]
 
 [project.optional-dependencies]
